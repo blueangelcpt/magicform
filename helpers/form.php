@@ -120,7 +120,6 @@ class FormHelper extends AppHelper {
 			$key = $object->primaryKey;
 			$this->fieldset[$model] = array_merge($defaults, compact('fields', 'key', 'validates', 'messages'));
 		}
-
 		return $object;
 	}
 
@@ -753,22 +752,14 @@ class FormHelper extends AppHelper {
 			$this->_introspectModel($modelKey);
 		}
 
-		if (isset($this->fieldset[$modelKey])) {
-			if (isset($this->fieldset[$modelKey]['validates'])) {
-				foreach ($this->fieldset[$modelKey]['validates'] as $requiredField) {
-					if ($requiredField == $fieldName) {
-						$options['required'] = 'required';
-					}
-				}
+		foreach ($this->fieldset[$modelKey]['validates'] as $requiredField) {
+			if ($requiredField == $fieldKey) {
+				$options['required'] = 'required';
 			}
-			if (isset($this->fieldset[$modelKey]['messages'])) {
-				foreach ($this->fieldset[$modelKey]['messages'] as $field => $message) {
-					if ($field == $fieldName) {
-						$options['title'] = $message;
-						$options['x-moz-errormessage'] = $message;
-					}
-				}
-			}
+		}
+		if (isset($this->fieldset[$modelKey]['messages'][$fieldKey])) {
+			$options['title'] = $this->fieldset[$modelKey]['messages'][$fieldKey];
+			$options['x-moz-errormessage'] = $this->fieldset[$modelKey]['messages'][$fieldKey];
 		}
 
 		if (!isset($options['type'])) {
