@@ -1,33 +1,11 @@
 <?php
 /**
- * Automatic generation of HTML FORMs from given data.
+ * MagicForm form helper library.
  *
- * Used for scaffolding.
- *
- * PHP versions 4 and 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       cake
- * @subpackage    cake.cake.libs.view.helpers
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
-
-/**
- * Form helper library.
- *
- * Automatic generation of HTML FORMs from given data.
- *
- * @package       cake
- * @subpackage    cake.cake.libs.view.helpers
- * @link http://book.cakephp.org/view/1383/Form
+ * Based on CakePHP 1.3.20 native Form Helper
+ * Support for HTML5 form elements back-ported from Cake2.x by Nojima Takashi (http://php-tips.com/2011/05/03/cakephp13-html5-form-helper/)
+ * Support for HTML5 form validation by Ian van den Heuvel (http://blueangel.co.za)
+ * 
  */
 class FormHelper extends AppHelper {
 
