@@ -752,14 +752,16 @@ class FormHelper extends AppHelper {
 			$this->_introspectModel($modelKey);
 		}
 
-		foreach ($this->fieldset[$modelKey]['validates'] as $requiredField) {
-			if ($requiredField == $fieldKey) {
-				$options['required'] = 'required';
+		if (isset($this->fieldset[$modelKey])) {
+			foreach ($this->fieldset[$modelKey]['validates'] as $requiredField) {
+				if ($requiredField == $fieldKey) {
+					$options['required'] = 'required';
+				}
 			}
-		}
-		if (isset($this->fieldset[$modelKey]['messages'][$fieldKey])) {
-			$options['title'] = $this->fieldset[$modelKey]['messages'][$fieldKey];
-			$options['x-moz-errormessage'] = $this->fieldset[$modelKey]['messages'][$fieldKey];
+			if (isset($this->fieldset[$modelKey]['messages'][$fieldKey])) {
+				$options['title'] = $this->fieldset[$modelKey]['messages'][$fieldKey];
+				$options['x-moz-errormessage'] = $this->fieldset[$modelKey]['messages'][$fieldKey];
+			}
 		}
 
 		if (!isset($options['type'])) {
