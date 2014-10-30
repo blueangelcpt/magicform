@@ -10,17 +10,21 @@ function validate(element) {
 }
 
 $(function() {
+	/* quick workaround for firefox and password fields */
+	if (navigator.userAgent.search("Firefox") >= 0) {
+		$('input[type="password"]').each(function(index, e) {
+			$(e).attr('x-moz-errormessage', $(e).attr('data-validation-message'));
+			$(e).removeAttr('data-validation-message');
+		});
+	}
 	H5F.setup(document.getElementsByTagName('form'));
-	var inputs = document.getElementsByTagName('input');
-	var textareas = document.getElementsByTagName('textarea');
-	var selects = document.getElementsByTagName('select');
-	inputs = inputs.concat(textareas,selects);
-	for (i=0; i<inputs.length; i++) {
-		inputs[i].oninput = validate(inputs[i]);
-		if (inputs[i].addEventListener) {
-			inputs[i].addEventListener('change', function() { validate(this); }, false);
+	var allInputs = document.querySelectorAll('input,textarea,select');
+	for (i=0; i<allInputs.length; i++) {
+		allInputs[i].oninput = validate(allInputs[i]);
+		if (allInputs[i].addEventListener) {
+			allInputs[i].addEventListener('change', function() { validate(this); }, false);
 		} else {
-			inputs[i].attachEvent('change', function() { validate(this); });
+			allInputs[i].attachEvent('change', function() { validate(this); });
 		}
 	}
 })
