@@ -956,7 +956,10 @@ class FormHelper extends AppHelper {
 			$output .= $out[$element];
 			unset($out[$element]);
 		}
-
+		// if the field has a comment loaded in the DB, add it in as a message after the input field
+		if (!empty($this->fieldset[$modelKey]['fields'][$fieldKey]['comment'])) {
+			$output .= '<span class="instruction">' . $this->fieldset[$modelKey]['fields'][$fieldKey]['comment'] . '</span>';
+		}
 		if (!empty($divOptions['tag'])) {
 			$tag = $divOptions['tag'];
 			unset($divOptions['tag']);
