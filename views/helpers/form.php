@@ -5,6 +5,7 @@
  * Based on CakePHP 1.3.20 native Form Helper
  * Support for HTML5 form elements back-ported from Cake2.x by Nojima Takashi (http://php-tips.com/2011/05/03/cakephp13-html5-form-helper/)
  * Support for HTML5 form validation by Ian van den Heuvel (http://blueangel.co.za)
+ * Support for MySQL field comments by Ian van den Heuvel (http://blueangel.co.za)
  * 
  */
 class FormHelper extends AppHelper {
@@ -332,6 +333,8 @@ class FormHelper extends AppHelper {
 		$this->_lastAction($action);
 		$this->setEntity($model . '.', true);
 		$attributes = sprintf('action="%s" ', $action) . $this->_parseAttributes($htmlAttributes, null, '');
+		// automatically pull in the h5f and validation JS
+		$this->Html->script(array('/magicform/js/h5f.min', '/magicform/js/validation'), array('inline' => false));
 		return sprintf($this->Html->tags['form'], $attributes) . $append;
 	}
 
