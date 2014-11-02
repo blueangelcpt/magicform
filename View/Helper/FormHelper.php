@@ -486,6 +486,9 @@ class FormHelper extends AppHelper {
 			$this->_introspectModel($model, 'fields');
 		}
 
+		// automatically pull in the h5f and validation JS
+		$this->Html->script(array('Magicform.h5f.min', 'Magicform.validation'), array('inline' => false));
+
 		return $this->Html->useTag('form', $action, $htmlAttributes) . $append;
 	}
 
