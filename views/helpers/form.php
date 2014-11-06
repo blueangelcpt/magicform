@@ -757,8 +757,10 @@ class FormHelper extends AppHelper {
 
 		if (isset($this->fieldset[$modelKey])) {
 			foreach ($this->fieldset[$modelKey]['validates'] as $requiredField) {
-				if ($requiredField == $fieldKey) {
-					$options['required'] = 'required';
+				if (!isset($options['required']) || $options['required'] !== false) {
+					if ($requiredField == $fieldKey) {
+						$options['required'] = 'required';
+					}
 				}
 			}
 			if (isset($this->fieldset[$modelKey]['messages'][$fieldKey])) {
