@@ -1042,12 +1042,6 @@ class FormHelper extends AppHelper {
 		$selected = $this->_extractOption('selected', $options, null);
 		unset($options['selected']);
 
-		if ($options['type'] === 'datetime' || $options['type'] === 'date' || $options['type'] === 'time') {
-			$dateFormat = $this->_extractOption('dateFormat', $options, 'MDY');
-			$timeFormat = $this->_extractOption('timeFormat', $options, 12);
-			unset($options['dateFormat'], $options['timeFormat']);
-		}
-
 		$type = $options['type'];
 		$out = array('before' => $options['before'], 'label' => $label, 'between' => $options['between'], 'after' => $options['after']);
 		$format = $this->_getFormat($options);
@@ -1106,6 +1100,7 @@ class FormHelper extends AppHelper {
 				$list = $options['options'];
 				unset($options['options']);
 				return $this->select($fieldName, $list, $options);
+/*
 			case 'time':
 				$options += array('value' => $selected);
 				return $this->dateTime($fieldName, null, $timeFormat, $options);
@@ -1115,6 +1110,7 @@ class FormHelper extends AppHelper {
 			case 'datetime':
 				$options += array('value' => $selected);
 				return $this->dateTime($fieldName, $dateFormat, $timeFormat, $options);
+*/
 			case 'textarea':
 				return $this->textarea($fieldName, $options + array('cols' => '30', 'rows' => '6'));
 			case 'url':
@@ -1151,7 +1147,7 @@ class FormHelper extends AppHelper {
 			$options['type'] = 'textarea';
 		}
 
-		if ($options['type'] === 'datetime' || $options['type'] === 'date' || $options['type'] === 'time' || $options['type'] === 'select') {
+		if ($options['type'] === 'select') {
 			$options += array('empty' => false);
 		}
 		return $options;
@@ -1382,37 +1378,6 @@ class FormHelper extends AppHelper {
 	protected function _inputLabel($fieldName, $label, $options) {
 		$labelAttributes = $this->domId(array(), 'for');
 		$idKey = null;
-		if ($options['type'] === 'date' || $options['type'] === 'datetime') {
-			$firstInput = 'M';
-			if (array_key_exists('dateFormat', $options) &&
-				($options['dateFormat'] === null || $options['dateFormat'] === 'NONE')
-			) {
-				$firstInput = 'H';
-			} elseif (!empty($options['dateFormat'])) {
-				$firstInput = substr($options['dateFormat'], 0, 1);
-			}
-			switch ($firstInput) {
-				case 'D':
-					$idKey = 'day';
-					$labelAttributes['for'] .= 'Day';
-					break;
-				case 'Y':
-					$idKey = 'year';
-					$labelAttributes['for'] .= 'Year';
-					break;
-				case 'M':
-					$idKey = 'month';
-					$labelAttributes['for'] .= 'Month';
-					break;
-				case 'H':
-					$idKey = 'hour';
-					$labelAttributes['for'] .= 'Hour';
-			}
-		}
-		if ($options['type'] === 'time') {
-			$labelAttributes['for'] .= 'Hour';
-			$idKey = 'hour';
-		}
 		if (isset($idKey) && isset($options['id']) && isset($options['id'][$idKey])) {
 			$labelAttributes['for'] = $options['id'][$idKey];
 		}
