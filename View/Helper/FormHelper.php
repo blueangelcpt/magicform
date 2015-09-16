@@ -14,12 +14,6 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-/*
-App::uses('ClassRegistry', 'Utility');
-App::uses('AppHelper', 'View/Helper');
-App::uses('Hash', 'Utility');
-App::uses('Inflector', 'Utility');
-*/
 
 /**
  * Form helper library.
@@ -30,6 +24,7 @@ App::uses('Inflector', 'Utility');
  * @property      HtmlHelper $Html
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html
  */
+App::uses('AppHelper', 'View/Helper');
 class FormHelper extends AppHelper {
 
 /**
