@@ -1095,17 +1095,12 @@ class FormHelper extends AppHelper {
 				$list = $options['options'];
 				unset($options['options']);
 				return $this->select($fieldName, $list, $options);
-/*
 			case 'time':
-				$options += array('value' => $selected);
-				return $this->dateTime($fieldName, null, $timeFormat, $options);
+				return $this->text($fieldName, array('type' => 'time') + $options);
 			case 'date':
-				$options += array('value' => $selected);
-				return $this->dateTime($fieldName, $dateFormat, null, $options);
+				return $this->text($fieldName, array('type' => 'date') + $options);
 			case 'datetime':
-				$options += array('value' => $selected);
-				return $this->dateTime($fieldName, $dateFormat, $timeFormat, $options);
-*/
+				return $this->text($fieldName, array('type' => 'datetime-local') + $options);
 			case 'textarea':
 				return $this->textarea($fieldName, $options + array('cols' => '30', 'rows' => '6'));
 			case 'url':
