@@ -10,6 +10,6 @@
     "commit": "4c04855af4c1639d30aae12d701ee50c0678a251"
   },
   "_source": "git://github.com/ryanseddon/H5F.git",
-  "_target": "~1.1.1",
+  "_target": ">=1.1.1",
   "_originalSource": "h5f"
 }
