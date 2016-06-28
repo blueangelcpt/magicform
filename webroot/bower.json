@@ -2,7 +2,7 @@
   "name": "MagicForm",
   "version": "1.0.0",
   "dependencies": {
-	"h5f": ">=1.1.1"
+	"h5f": "*"
   },
   "private": true
 }
