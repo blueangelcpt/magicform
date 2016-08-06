@@ -14,6 +14,10 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+App::uses('ClassRegistry', 'Utility');
+App::uses('AppHelper', 'View/Helper');
+App::uses('Hash', 'Utility');
+App::uses('Inflector', 'Utility');
 
 /**
  * Form helper library.
@@ -24,7 +28,6 @@
  * @property      HtmlHelper $Html
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html
  */
-App::uses('AppHelper', 'View/Helper');
 class FormHelper extends AppHelper {
 
 /**
@@ -493,9 +496,6 @@ class FormHelper extends AppHelper {
 			$this->_introspectModel($model, 'fields');
 		}
 
-		// automatically pull in the h5f and validation JS
-		$this->Html->script(array('Magicform.h5f.min', 'Magicform.validation'), array('inline' => false));
-
 		if ($action === null) {
 			return $this->Html->useTag('formwithoutaction', $htmlAttributes) . $append;
 		}
@@ -679,7 +679,10 @@ class FormHelper extends AppHelper {
 		if (!$field) {
 			$field = $this->entity();
 		} elseif (is_string($field)) {
-			$field = Hash::filter(explode('.', $field));
+			$field = explode('.', $field);
+		}
+		if (is_array($field)) {
+			$field = Hash::filter($field);
 		}
 
 		foreach ($this->_unlockedFields as $unlockField) {
@@ -951,6 +954,7 @@ class FormHelper extends AppHelper {
 			$legend = $options['legend'];
 			unset($options['legend']);
 		}
+
 		if (isset($options['fieldset'])) {
 			$fieldset = $options['fieldset'];
 			unset($options['fieldset']);
@@ -1770,12 +1774,8 @@ class FormHelper extends AppHelper {
 /**
  * Create a `<button>` tag with a surrounding `<form>` that submits via POST.
  *
- * This method creates a `<form>` element. If you want to use this method inside of an
- * existing form, you must use the `inline` or `block` options so that the new form is
- * being set to a view block that can be rendered outside of the main form.
- *
- * If all you are looking for is a button to submit your form, then you should use
- * `FormHelper::submit()` instead.
+ * This method creates a `<form>` element. So do not use this method in an already opened form.
+ * Instead use FormHelper::submit() or FormHelper::button() to create buttons inside opened forms.
  *
  * ### Options:
  *
@@ -1805,8 +1805,12 @@ class FormHelper extends AppHelper {
  * Creates an HTML link, but access the URL using the method you specify (defaults to POST).
  * Requires javascript to be enabled in browser.
  *
- * This method creates a `<form>` element. So do not use this method inside an existing form.
- * Instead you should add a submit button using FormHelper::submit()
+ * This method creates a `<form>` element. If you want to use this method inside of an
+ * existing form, you must use the `inline` or `block` options so that the new form is
+ * being set to a view block that can be rendered outside of the main form.
+ *
+ * If all you are looking for is a button to submit your form, then you should use
+ * `FormHelper::submit()` instead.
  *
  * ### Options:
  *
