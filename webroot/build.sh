@@ -3,7 +3,7 @@ echo Updating Bower components...
 rm -rf components
 bower install
 echo Copying files...
-npm install
+ln -s /usr/local/lib/node_modules/ node_modules
 grunt
-rm -rf node_modules
+rm node_modules
 rm -rf components
