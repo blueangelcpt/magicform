@@ -1,0 +1,8 @@
+{
+  "name": "magicform",
+  "version": "1.0.0",
+  "dependencies": {
+	"h5f": "*"
+  },
+  "private": true
+}
